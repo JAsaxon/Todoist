@@ -1,0 +1,78 @@
+$background-color: white;
+$text-color-secondary: #595959;
+$text-color-secondary-dark: #838383;
+$text-on-accent: #f05d5d;
+$accent: #d62b2b;
+
+$accent-translucent: hsla(0, 60%, 48%, 0.397);
+
+$tag-color-1: #ffdc5f;
+$tag-color-2: #71dc7b;
+$tag-color-3: #58c3ff;
+body {
+  background-color: $background-color;
+  font-family: "Inter";
+}
+.app-box {
+  display: flex;
+}
+.sidebar {
+  background-color: black;
+  min-height: 100vh;
+  width: 290px;
+  color: white;
+  padding: 1em;
+  .username {
+    display: flex;
+    align-items: center;
+    .profile-picture {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      margin: 1em;
+    }
+  }
+  .times {
+    margin: 0.5em;
+    font-size: 24px;
+    color: $text-color-secondary-dark;
+    .time {
+      padding: 1em 2em;
+    }
+    .active {
+      border-radius: 64px;
+      background-color: $accent-translucent;
+      color: $text-on-accent;
+    }
+  }
+  .project::before {
+    content: "#";
+    padding: 1em;
+  }
+  .color1::before {
+    color: $tag-color-1;
+  }
+  .color2::before {
+    color: $tag-color-2;
+  }
+  .color3::before {
+    color: $tag-color-3;
+  }
+}
+.main-app {
+  margin: 7em 10em;
+  .add-section {
+    margin: 1em 0;
+    font-size: 32px;
+    .add {
+      font-weight: 900;
+      color: $accent;
+    }
+    .text {
+      color: $text-color-secondary;
+      margin-left: 0.75em;
+    }
+  }
+}
