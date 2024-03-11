@@ -4,9 +4,9 @@ import { task } from "./types.ts";
 
 import { Add } from "./Add.tsx";
 import { Task } from "./Task.tsx";
-import { Link } from "react-router-dom";
-function App() {
-  const [Tasks, setTasks] = useState<task[]>([]);
+import { useLocalStorage } from "react-use";
+export default function Today() {
+  const [Tasks, setTasks] = useLocalStorage<task[]>("TODAY", []);
   function handleAdd(task: task) {
     setTasks((prev) => [...prev, task]);
   }
@@ -28,34 +28,14 @@ function App() {
   }
   return (
     <>
-      <div className="app-box">
-        <div className="sidebar">
-          <div className="username">
-            <span className="profile-picture"></span>jorgesaxon1234
-          </div>
-          <div className="times">
-            <div className="time active">Today</div>
-
-            <Link to="./week">
-              <div className="time">This Week</div>
-            </Link>
-            <div className="time">Eventually</div>
-          </div>
-          <div className="projects">
-            <div className="project color1">Social</div>
-            <div className="project color2">Web development</div>
-            <div className="project color3">Work</div>
-          </div>
-        </div>
-        <div className="main-app">
-          <h1 className="section">Today</h1>
-          <Add handleAdd={handleAdd} />
-          <TaskList
-            tasks={Tasks}
-            completeTask={handleComplete}
-            deleteTask={handleDelete}
-          />
-        </div>
+      <div className="main-app">
+        <h1 className="section">Today</h1>
+        <Add handleAdd={handleAdd} />
+        <TaskList
+          tasks={Tasks}
+          completeTask={handleComplete}
+          deleteTask={handleDelete}
+        />
       </div>
     </>
   );
@@ -84,5 +64,3 @@ function TaskList({ tasks, completeTask, deleteTask }: taskListProps) {
     </div>
   );
 }
-
-export default App;

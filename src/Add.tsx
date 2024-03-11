@@ -67,6 +67,7 @@ function AddForm({ handleAdd, handleClose }: addFormProps) {
         type="text"
         placeholder="Name of the task"
         name="name"
+        autoFocus
         ref={name}
         onChange={updateEnabled}
       />

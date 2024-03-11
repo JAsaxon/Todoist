@@ -6,6 +6,7 @@ body {
 .app-box {
   display: flex;
 }
+
 .sidebar {
   background-color: black;
   min-height: 100vh;
@@ -28,6 +29,10 @@ body {
     margin: 0.5em;
     font-size: 24px;
     color: $text-color-secondary-dark;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
     .time {
       padding: 1em 2em;
     }
@@ -87,6 +92,9 @@ body {
       font-size: 0.6em;
       color: $text-color-secondary;
       margin-left: 0.75em;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
