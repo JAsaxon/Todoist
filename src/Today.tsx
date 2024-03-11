@@ -34,7 +34,7 @@ function App() {
             <span className="profile-picture"></span>jorgesaxon1234
           </div>
           <div className="times">
-            <div className="time active">Today</div>
+            <div className="time active">Todays</div>
 
             <Link to="./week">
               <div className="time">This Week</div>
