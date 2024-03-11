@@ -63,16 +63,49 @@ body {
 }
 .main-app {
   margin: 7em 10em;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
   .add-section {
     margin: 1em 0;
     font-size: 32px;
+    display: flex;
+    flex-grow: 1;
+    &:hover {
+      cursor: pointer;
+      .add {
+        background-color: $accent;
+        color: white;
+      }
+      .text {
+        color: $accent;
+      }
+    }
     .add {
       font-weight: 900;
       color: $accent;
+      transition: 500ms;
     }
     .text {
       color: $text-color-secondary;
       margin-left: 0.75em;
     }
+  }
+}
+.add-form {
+  flex-grow: 1;
+  padding: 0.3em;
+  border-radius: 20px;
+  color: #acacac;
+  border: #d3d3d3 1px solid;
+  display: flex;
+  flex-direction: column;
+  input {
+    border: none;
+    font-size: 0.5em;
+    font-weight: 600;
+  }
+  * {
+    width: fit-content;
   }
 }
