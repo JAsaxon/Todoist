@@ -1,0 +1,143 @@
+@use "./variables.scss" as *;
+body {
+  background-color: $background-color;
+  font-family: "Inter";
+}
+.app-box {
+  display: flex;
+}
+.sidebar {
+  background-color: black;
+  min-height: 100vh;
+  width: 290px;
+  color: white;
+  padding: 1em;
+  .username {
+    display: flex;
+    align-items: center;
+    .profile-picture {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      margin: 1em;
+    }
+  }
+  .times {
+    margin: 0.5em;
+    font-size: 24px;
+    color: $text-color-secondary-dark;
+    .time {
+      padding: 1em 2em;
+    }
+    .active {
+      border-radius: 64px;
+      background-color: $accent-translucent;
+      color: $text-on-accent;
+    }
+  }
+  .project::before {
+    content: "#";
+    padding: 1em;
+  }
+  .color1::before {
+    color: $tag-color-1;
+  }
+  .color2::before {
+    color: $tag-color-2;
+  }
+  .color3::before {
+    color: $tag-color-3;
+  }
+}
+.main-app {
+  margin: 7em 10em;
+  flex-grow: 1;
+  flex-direction: column;
+  .add-section {
+    margin: 1em 0;
+    font-size: 32px;
+    display: flex;
+    flex-grow: 1;
+    &:hover {
+      cursor: pointer;
+      .add {
+        background-color: $accent;
+        color: white;
+      }
+      .text {
+        color: $accent;
+      }
+    }
+    .add {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.5em;
+      font-weight: 900;
+      color: $accent;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      transition: 500ms;
+    }
+    .text {
+      border: none;
+      font-size: 0.6em;
+      color: $text-color-secondary;
+      margin-left: 0.75em;
+    }
+  }
+}
+.add-form {
+  flex-grow: 1;
+  padding: 0.3em;
+  border-radius: 20px;
+  color: #acacac;
+  border: #d3d3d3 1px solid;
+  display: flex;
+  height: 6em;
+  flex-direction: column;
+  input {
+    border: none;
+    font-size: 0.5em;
+    font-weight: 600;
+    height: 20em;
+    margin: 0.5em 0;
+    &:focus {
+      outline: none;
+    }
+  }
+  .buttons {
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+    margin-right: 2em;
+    button {
+      border: none;
+      margin: 1em;
+      padding: 0.5em 1em;
+      border-radius: 7px;
+    }
+    .submit-button {
+      transition: 0.3s;
+      color: rgb(238, 238, 238);
+      background-color: $accent;
+      &:hover {
+        filter: contrast(1.1);
+      }
+    }
+    .submit-button.false {
+      cursor: not-allowed;
+      filter: grayscale(0.3);
+    }
+  }
+  * {
+    width: fit-content;
+  }
+}
+.task-list {
+  display: flex;
+  flex-direction: column;
+}

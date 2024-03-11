@@ -1,0 +1,75 @@
+@use "./variables.scss" as *;
+
+.task-wrapper {
+  display: flex;
+  .utilities {
+    opacity: 0;
+    transition: 0.3s;
+  }
+  .utilities.hover {
+    opacity: 1;
+    * {
+    }
+  }
+  .utility {
+    padding: 5px;
+    transition: 50ms;
+    border-radius: 5px;
+    color: rgb(179, 135, 145);
+
+    cursor: pointer;
+    svg {
+      height: 20px;
+    }
+    &:hover {
+      color: $accent;
+      background-color: #dfdfdf;
+    }
+  }
+}
+.task {
+  display: flex;
+  padding-bottom: 1em;
+  height: 2em;
+  transition: 200ms;
+  flex-grow: 1;
+  cursor: pointer;
+  input {
+    cursor: pointer;
+    width: 2em;
+    height: 2em;
+    margin-right: 1em;
+  }
+  div {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 1em;
+    font-weight: 700;
+    color: #242424;
+  }
+  p {
+    font-size: 0.9em;
+    color: #595959;
+  }
+  &:hover {
+    h1 {
+      font-weight: 2em;
+      color: black;
+      font-weight: 800;
+    }
+    p {
+      color: #141414;
+    }
+  }
+  &.true {
+    * {
+      text-decoration: line-through;
+    }
+    div {
+      opacity: 0.6;
+    }
+  }
+}

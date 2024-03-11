@@ -1,33 +1,14 @@
-import "./App.scss";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Today from "./Today";
+import ThisWeek from "./ThisWeek";
 
 function App() {
   return (
-    <>
-      <div className="app-box">
-        <div className="sidebar">
-          <div className="username">
-            <span className="profile-picture"></span>jorgesaxon1234
-          </div>
-          <div className="times">
-            <div className="time active">Today</div>
-            <div className="time">This Week</div>
-            <div className="time">Eventually</div>
-          </div>
-          <div className="projects">
-            <div className="project color1">Social</div>
-            <div className="project color2">Web development</div>
-            <div className="project color3">Work</div>
-          </div>
-        </div>
-        <div className="main-app">
-          <h1 className="section">Today</h1>
-          <div className="add-section">
-            <span className="add">+</span>
-            <span className="text">Add task...</span>
-          </div>
-        </div>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Today />} />
+      <Route path="/week" element={<ThisWeek />} />
+    </Routes>
   );
 }
 
