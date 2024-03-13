@@ -1,0 +1,118 @@
+@use "./variables.scss" as *;
+
+.sidebar {
+  background-color: black;
+  min-height: 100vh;
+  width: 290px;
+  color: white;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  .username {
+    display: flex;
+    align-items: center;
+    .profile-picture {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      margin: 1em;
+    }
+  }
+  .times {
+    margin: 0.5em;
+    font-size: 24px;
+    color: $text-color-secondary-dark;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .time {
+      padding: 1em 2em;
+    }
+    .active {
+      border-radius: 64px;
+      background-color: $accent-translucent;
+      color: $text-on-accent;
+    }
+  }
+  .section-title {
+    font-size: 1.2rem;
+    color: #acacac;
+    margin-bottom: 1em;
+    cursor: pointer;
+    display: flex;
+    margin: 1em;
+    .text {
+      flex-grow: 1;
+    }
+    .icons {
+      display: flex;
+      svg {
+        margin-left: auto;
+        &:hover {
+          color: rgb(228, 228, 228);
+        }
+      }
+      .add {
+        margin-right: 1em;
+      }
+    }
+  }
+  .project {
+    font-size: 1em;
+    margin-bottom: 0.2em;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    align-items: center;
+    cursor: pointer;
+    .text {
+      padding: 1em;
+      padding-left: 0;
+    }
+    .icon-more {
+      height: 40px;
+      width: 40px;
+      margin-left: auto;
+      display: flex;
+      justify-content: center;
+      * {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      &:hover {
+        background-color: rgba(34, 34, 34, 0.493);
+      }
+    }
+  }
+  .project:hover {
+    background-color: rgba(29, 29, 29, 0.726);
+  }
+  .project::before {
+    content: "#";
+    padding-right: 1em;
+    margin-left: 2em;
+  }
+  .color1::before {
+    color: $tag-color-1;
+  }
+  .color2::before {
+    color: $tag-color-2;
+  }
+  .color3::before {
+    color: $tag-color-3;
+  }
+}
+.modal {
+  .modal-dialog {
+    button {
+    }
+  }
+}
+.create-project {
+}

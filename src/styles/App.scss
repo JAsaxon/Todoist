@@ -7,64 +7,16 @@ body {
   display: flex;
 }
 
-.sidebar {
-  background-color: black;
-  min-height: 100vh;
-  width: 290px;
-  color: white;
-  padding: 1em;
-  .username {
-    display: flex;
-    align-items: center;
-    .profile-picture {
-      display: flex;
-      width: 50px;
-      height: 50px;
-      background-color: rgb(255, 255, 255);
-      border-radius: 50%;
-      margin: 1em;
-    }
-  }
-  .times {
-    margin: 0.5em;
-    font-size: 24px;
-    color: $text-color-secondary-dark;
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    .time {
-      padding: 1em 2em;
-    }
-    .active {
-      border-radius: 64px;
-      background-color: $accent-translucent;
-      color: $text-on-accent;
-    }
-  }
-  .project::before {
-    content: "#";
-    padding: 1em;
-  }
-  .color1::before {
-    color: $tag-color-1;
-  }
-  .color2::before {
-    color: $tag-color-2;
-  }
-  .color3::before {
-    color: $tag-color-3;
-  }
-}
 .main-app {
-  margin: 7em 10em;
+  padding: 7em 10em;
   flex-grow: 1;
+  display: flex;
+  max-width: 1000px;
   flex-direction: column;
+  margin: 0 auto;
   .add-section {
     margin: 1em 0;
     font-size: 32px;
-    display: flex;
-    flex-grow: 1;
     &:hover {
       cursor: pointer;
       .add {

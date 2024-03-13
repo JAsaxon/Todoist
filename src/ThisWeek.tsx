@@ -1,8 +1,8 @@
 import "./styles/App.scss";
 import { task } from "./types.ts";
 
-import { Add } from "./Add.tsx";
-import { Task } from "./Task.tsx";
+import { Add } from "./components/Add.tsx";
+import { Task } from "./components/Task.tsx";
 import { useLocalStorage } from "react-use";
 export default function ThisWeek() {
   const [Tasks, setTasks] = useLocalStorage<task[]>("WEEK", []);

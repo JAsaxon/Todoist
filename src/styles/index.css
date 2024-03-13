@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -9,7 +10,9 @@ html {
 *:after {
   box-sizing: inherit;
 }
-
+option {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 body,
 h1,
 h2,

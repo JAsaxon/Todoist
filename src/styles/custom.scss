@@ -1,0 +1,7 @@
+@use "variables" as *;
+$primary: $accent;
+$secondary: $text-color-secondary;
+$font-family-sans-serif: "Inter";
+$font-family-base: "Inter";
+$font-family-monospace: "Inter";
+@import "../../node_modules/bootstrap/scss/bootstrap";
