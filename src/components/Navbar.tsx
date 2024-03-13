@@ -15,45 +15,12 @@ import {
   Card,
   Modal,
   useAccordionButton,
+  Form,
 } from "react-bootstrap";
-import { useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { AccordionEventKey } from "react-bootstrap/esm/AccordionContext";
-const PINK = "rgba(255, 192, 203, 0.6)";
-const BLUE = "rgba(0, 0, 255, 0.6)";
-type contextAwareToggleProps = {
-  children: React.ReactNode;
-  eventKey: string;
-  callback?: (arg: AccordionEventKey) => void;
-};
-function Toggle({ children, eventKey, callback }: contextAwareToggleProps) {
-  const { activeEventKey } = useContext(AccordionContext);
+import ColorSelection from "./ColorSelection";
 
-  const decoratedOnClick = useAccordionButton(
-    eventKey,
-    () => callback && callback(eventKey)
-  );
-
-  const sectionTitle = (hovered: boolean) => (
-    <h1 className="section-title">
-      <div className="text">My projects</div>
-      <span className="icons">
-        {hovered && (
-          <FontAwesomeIcon
-            icon={faAdd}
-            className="add"
-            onClick={() => setCreateProject(true)}
-          />
-        )}{" "}
-        <FontAwesomeIcon icon={faCaretDown} onClick={decoratedOnClick} />{" "}
-      </span>
-    </h1>
-  );
-  const [HoverableSectionTitle] = useHover(sectionTitle);
-
-  const isCurrentEventKey = activeEventKey === eventKey;
-
-  return <div>{HoverableSectionTitle}</div>;
-}
 export function Navbar() {
   const [createProject, setCreateProject] = useState(false);
 
@@ -79,7 +46,7 @@ export function Navbar() {
       />
       <Accordion defaultActiveKey="0">
         <Card.Header>
-          <Toggle eventKey="0"> </Toggle>
+          <ProjectsToggle eventKey="0" setModal={setCreateProject} />
         </Card.Header>
         <Accordion.Collapse eventKey="0">
           <div className="projects">
@@ -97,13 +64,55 @@ type createProjectModalProps = {
   show: boolean;
   handleClose: () => void;
 };
+type ProjectsToggle = {
+  eventKey: string;
+  callback?: (arg: AccordionEventKey) => void;
+  setModal: Dispatch<SetStateAction<boolean>>;
+};
+function ProjectsToggle({ eventKey, callback, setModal }: ProjectsToggle) {
+  const { activeEventKey } = useContext(AccordionContext);
+
+  const decoratedOnClick = useAccordionButton(
+    eventKey,
+    () => callback && callback(eventKey)
+  );
+
+  const sectionTitle = (hovered: boolean) => (
+    <h1 className="section-title">
+      <div className="text">My projects</div>
+      <span className="icons">
+        {hovered && (
+          <FontAwesomeIcon
+            icon={faAdd}
+            className="add"
+            onClick={() => setModal(true)}
+          />
+        )}{" "}
+        <FontAwesomeIcon icon={faCaretDown} onClick={decoratedOnClick} />{" "}
+      </span>
+    </h1>
+  );
+  const [HoverableSectionTitle] = useHover(sectionTitle);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const isCurrentEventKey = activeEventKey === eventKey;
+
+  return <div>{HoverableSectionTitle}</div>;
+}
 function CreateProjectModal({ show, handleClose }: createProjectModalProps) {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} className="modal create-project">
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Add Project</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+      <Modal.Body>
+        <Form>
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" placeholder="Your project..." />
+          <Form.Label>Color</Form.Label>
+          <ColorSelection />
+        </Form>
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
