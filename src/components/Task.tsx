@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./styles/Task.scss";
+import "../styles/Task.scss";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { task } from "./types.ts";
+import { task } from "../types.ts";
 export type taskJsxProps = {
   task: task;
   deleteTask: (uuid: string) => void;

@@ -1,21 +1,20 @@
-import { useState } from "react";
 import "./styles/App.scss";
 import { task } from "./types.ts";
 
-import { Add } from "./Add.tsx";
-import { Task } from "./Task.tsx";
+import { Add } from "./components/Add.tsx";
+import { Task } from "./components/Task.tsx";
 import { useLocalStorage } from "react-use";
 export default function Today() {
   const [Tasks, setTasks] = useLocalStorage<task[]>("TODAY", []);
   function handleAdd(task: task) {
-    setTasks((prev) => [...prev, task]);
+    setTasks((prev) => [...(prev as task[]), task]);
   }
 
   function removeTaskFilter(uuid: string): task[] {
-    return Tasks.filter((el) => el.id !== uuid);
+    return Tasks!.filter((el) => el.id !== uuid);
   }
   function handleComplete(uuid: string) {
-    const editedTask = Tasks.filter((el) => el.id === uuid)[0];
+    const editedTask = Tasks!.filter((el) => el.id === uuid)[0];
     editedTask.Completed = !editedTask.Completed;
     const rest = removeTaskFilter(uuid);
     setTasks(
@@ -32,7 +31,7 @@ export default function Today() {
         <h1 className="section">Today</h1>
         <Add handleAdd={handleAdd} />
         <TaskList
-          tasks={Tasks}
+          tasks={Tasks as task[]}
           completeTask={handleComplete}
           deleteTask={handleDelete}
         />

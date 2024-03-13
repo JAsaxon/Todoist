@@ -1,32 +1,15 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Today from "./Today";
 import ThisWeek from "./ThisWeek";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <div className="app-box">
-          <div className="sidebar">
-            <div className="username">
-              <span className="profile-picture"></span>jorgesaxon1234
-            </div>
-            <div className="times">
-              <Link to="./">
-                <div className="time active">Today</div>
-              </Link>
+          <Navbar />
 
-              <Link to="./week">
-                <div className="time">This Week</div>
-              </Link>
-              <div className="time">Eventually</div>
-            </div>
-            <div className="projects">
-              <div className="project color1">Social</div>
-              <div className="project color2">Web development</div>
-              <div className="project color3">Work</div>
-            </div>
-          </div>
           <Routes>
             <Route path="/" element={<Today />} />
             <Route path="/week" element={<ThisWeek />} />
@@ -36,5 +19,8 @@ function App() {
     </div>
   );
 }
-
+export type projectProps = {
+  text: string;
+  color: number;
+};
 export default App;

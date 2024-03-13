@@ -1,5 +1,5 @@
 import { FormEvent, useRef, useState } from "react";
-import { task } from "./types.ts";
+import { task } from "../types.ts";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
