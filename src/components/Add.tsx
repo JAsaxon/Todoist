@@ -1,13 +1,14 @@
 import { FormEvent, useRef, useState } from "react";
-import { task } from "../types.ts";
+import { section, task } from "../types.ts";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export type addProps = {
   handleAdd: (Task: task) => void;
+  section_id: section;
 };
-export const Add = ({ handleAdd }: addProps) => {
+export const Add = ({ handleAdd, section_id }: addProps) => {
   const [formOpen, setFormOpen] = useState(false);
   function handleClose() {
     console.log("y58r", formOpen);
@@ -24,14 +25,21 @@ export const Add = ({ handleAdd }: addProps) => {
           <input type="text" className="text" placeholder="Add task..." />
         </div>
       )}
-      {formOpen && <AddForm handleAdd={handleAdd} handleClose={handleClose} />}
+      {formOpen && (
+        <AddForm
+          handleAdd={handleAdd}
+          handleClose={handleClose}
+          section_id={section_id}
+        />
+      )}
     </div>
   );
 };
 type addFormProps = addProps & {
   handleClose: () => void;
+  section_id: section;
 };
-function AddForm({ handleAdd, handleClose }: addFormProps) {
+function AddForm({ handleAdd, handleClose, section_id }: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const [enabled, setEnabled] = useState(false);
@@ -41,7 +49,7 @@ function AddForm({ handleAdd, handleClose }: addFormProps) {
       handleAdd({
         Title: name.current!.value,
         Description: description.current!.value,
-        Section: "TODAY",
+        Section: section_id,
         Completed: false,
         id: uuid(),
         timeCreated: Date.now(),
