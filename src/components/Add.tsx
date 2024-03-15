@@ -3,6 +3,7 @@ import { section, task } from "../types.ts";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import DateButton from "./DateButton.tsx";
 
 export type addProps = {
   handleAdd: (Task: task) => void;
@@ -85,6 +86,7 @@ function AddForm({ handleAdd, handleClose, section_id }: addFormProps) {
         className="description"
         ref={description}
       />
+      <DateButton />
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">
           Close
