@@ -4,7 +4,7 @@
   background-color: inherit;
   outline: none;
   border: none;
-
+  overflow: visible !important;
   border: 2px solid $border-color;
   border-radius: 5px;
   padding: 0.25em 0.75em;
@@ -21,6 +21,7 @@
   &::after {
     display: none !important;
   }
+  z-index: 1000;
   .fa-x {
     color: $text-color-secondary;
     height: 100%;
