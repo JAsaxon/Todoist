@@ -12,7 +12,7 @@ type dateButtonProps = {
 function DateButton({ title }: dateButtonProps) {
   const currentClass = StringToKebabCase(title.toLowerCase());
   const [Calendar, setCalendar] = useState<Moment | null>(moment());
-  console.log("date", Calendar?.isSame(moment()));
+  const [MenuVisible, setMenuVisible] = useState(false);
   type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
   type stateEvent =
     | "Today"
@@ -20,7 +20,9 @@ function DateButton({ title }: dateButtonProps) {
     | "Next Weekend"
     | "Next Week"
     | Moment;
+
   function stateManager(input: stateEvent) {
+    setMenuVisible(false);
     // if input is a moment
     if (typeof input === "string") {
       switch (input) {
@@ -35,39 +37,62 @@ function DateButton({ title }: dateButtonProps) {
           setCalendar(moment().day(7));
           break;
         case "Tomorrow":
+          console.log("x");
           setCalendar(moment().add(1, "d"));
           break;
       }
       return;
     }
+    setMenuVisible(false);
     if (moment.isMoment(input)) {
       setCalendar(input);
+      return;
     }
     console.error("NOT A VALID INPUT");
   }
+  console.log(MenuVisible);
   return (
-    <Dropdown autoClose={false} className="date-dropdown">
-      <Dropdown.Toggle as="button" className={`date-button ${currentClass}`}>
+    <Dropdown className="date-dropdown" autoClose={false} show={MenuVisible}>
+      <Dropdown.Toggle
+        id="dropdown-basic"
+        className={`date-button ${currentClass}`}
+        onClick={() => setMenuVisible(true)}
+      >
         <i className="fa-regular fa-calendar icon"></i>
         {title}
         <i className="fa-solid fa-x"></i>
       </Dropdown.Toggle>
-      <Dropdown.Menu className="date-menu">
-        <Dropdown.Item className="option">
-          <i className="fa-regular fa-calendar icon"></i>Today
+      <Dropdown.Menu className="date-menu" show={MenuVisible}>
+        <Dropdown.Item className="option" onClick={() => stateManager("Today")}>
+          <i className="fa-regular fa-calendar icon"></i>
+          Today
         </Dropdown.Item>
-        <Dropdown.Item className="option">
-          <i className="fa-regular fa-sun icon"></i>Tommorow
+        <Dropdown.Item
+          className="option"
+          onClick={() => stateManager("Tomorrow")}
+        >
+          <i className="fa-regular fa-sun icon"></i>
+          Tommorow
         </Dropdown.Item>
-        <Dropdown.Item className="option">
-          <i className="fa-solid fa-couch icon"></i>Next Weekend
+
+        <Dropdown.Item
+          className="option"
+          onClick={() => stateManager("Next Weekend")}
+        >
+          <i className="fa-solid fa-couch icon"></i>
+          Next Weekend
         </Dropdown.Item>
-        <Dropdown.Item className="option">
-          <i className="fa-solid fa-arrow-right icon"></i>Next Week
+
+        <Dropdown.Item
+          className="option"
+          onClick={() => stateManager("Next Week")}
+        >
+          <i className="fa-solid fa-arrow-right icon"></i>
+          Next Week
         </Dropdown.Item>
         <DateCalendar
           value={Calendar}
-          onChange={(newValue) => setCalendar(newValue)}
+          onChange={(newValue) => stateManager(newValue)}
         />
       </Dropdown.Menu>
     </Dropdown>
