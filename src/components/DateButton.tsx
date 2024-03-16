@@ -13,6 +13,38 @@ function DateButton({ title }: dateButtonProps) {
   const currentClass = StringToKebabCase(title.toLowerCase());
   const [Calendar, setCalendar] = useState<Moment | null>(moment());
   console.log("date", Calendar?.isSame(moment()));
+  type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
+  type stateEvent =
+    | "Today"
+    | "Tomorrow"
+    | "Next Weekend"
+    | "Next Week"
+    | Moment;
+  function stateManager(input: stateEvent) {
+    // if input is a moment
+    if (typeof input === "string") {
+      switch (input) {
+        case "Today":
+          setCalendar(moment());
+          break;
+        case "Next Week":
+          setCalendar(moment().day(8));
+
+          break;
+        case "Next Weekend":
+          setCalendar(moment().day(7));
+          break;
+        case "Tomorrow":
+          setCalendar(moment().add(1, "d"));
+          break;
+      }
+      return;
+    }
+    if (moment.isMoment(input)) {
+      setCalendar(input);
+    }
+    console.error("NOT A VALID INPUT");
+  }
   return (
     <Dropdown autoClose={false} className="date-dropdown">
       <Dropdown.Toggle as="button" className={`date-button ${currentClass}`}>

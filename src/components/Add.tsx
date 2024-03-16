@@ -4,7 +4,6 @@ import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import DateButton from "./DateButton.tsx";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 
 export type addProps = {
   handleAdd: (Task: task) => void;
@@ -17,6 +16,7 @@ export const Add = ({ handleAdd, section_id, dueDate, title }: addProps) => {
   function handleClose() {
     setFormOpen(false);
   }
+
   return (
     <div className="add-section">
       {!formOpen && (
