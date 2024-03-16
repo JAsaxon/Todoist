@@ -24,7 +24,6 @@ import ColorSelection from "./ColorSelection";
 export function Navbar() {
   const [createProject, setCreateProject] = useState(false);
   const location = useLocation().pathname;
-  console.log(location, "LOCATION");
   return (
     <div className="sidebar">
       <div className="username">

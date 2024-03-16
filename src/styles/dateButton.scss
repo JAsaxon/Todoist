@@ -30,6 +30,40 @@
     margin-left: 1em;
   }
 }
+.date-menu {
+  .option {
+    margin: 1em;
+    font-size: 0.9e;
+    width: 80%;
+    border-radius: 2px;
+    background-color: transparent !important;
+    color: $text-color-primary !important;
+  }
+  .icon {
+    margin: 0.2em;
+    width: 40px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1em;
+  }
+  .fa-calendar {
+    color: $text-green;
+  }
+  .fa-sun {
+    color: $text-yellow;
+  }
+  .fa-couch {
+    color: $text-blue;
+  }
+  .fa-arrow-right {
+    color: $text-purple;
+  }
+}
+
 .today {
   color: $text-green;
+}
+.this-week {
+  color: $text-blue;
 }

@@ -5,6 +5,7 @@ export type task = {
   Completed: boolean;
   id: string;
   timeCreated: number;
+  dueDate: number;
 };
 export type section = "TODAY" | "WEEK" | string;
 export type storageKeys = "TASKS";

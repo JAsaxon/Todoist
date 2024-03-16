@@ -11,9 +11,10 @@ import { DateCalendar } from "@mui/x-date-pickers";
 type SectionProps = {
   title: string;
   section_id: section;
+  dueDate: number;
 };
 
-export default function Section({ title, section_id }: SectionProps) {
+export default function Section({ title, section_id, dueDate }: SectionProps) {
   const [reducerTasks, Dispatch] = [
     useContext(TasksContext),
     useContext(TasksDispatchContext),
@@ -23,9 +24,7 @@ export default function Section({ title, section_id }: SectionProps) {
       return task.Section === section_id;
     });
   }
-  console.log(reducerTasks, "Reducer Tasks");
   function handleAdd(task: task) {
-    console.log(reducerTasks);
     Dispatch!({
       action: "HANDLE_ADD",
       handledTask: task,
@@ -52,7 +51,12 @@ export default function Section({ title, section_id }: SectionProps) {
     <>
       <div className="main-app">
         <h1 className="section">{title}</h1>
-        <Add handleAdd={handleAdd} section_id={section_id} />
+        <Add
+          title={title}
+          handleAdd={handleAdd}
+          section_id={section_id}
+          dueDate={dueDate}
+        />
         <TaskList
           tasks={getTasks(reducerTasks) as task[]}
           completeTask={handleComplete}

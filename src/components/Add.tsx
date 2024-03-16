@@ -9,11 +9,12 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 export type addProps = {
   handleAdd: (Task: task) => void;
   section_id: section;
+  dueDate: number;
+  title: string;
 };
-export const Add = ({ handleAdd, section_id }: addProps) => {
+export const Add = ({ handleAdd, section_id, dueDate, title }: addProps) => {
   const [formOpen, setFormOpen] = useState(false);
   function handleClose() {
-    console.log("y58r", formOpen);
     setFormOpen(false);
   }
   return (
@@ -32,6 +33,8 @@ export const Add = ({ handleAdd, section_id }: addProps) => {
           handleAdd={handleAdd}
           handleClose={handleClose}
           section_id={section_id}
+          dueDate={dueDate}
+          title={title}
         />
       )}
     </div>
@@ -40,8 +43,15 @@ export const Add = ({ handleAdd, section_id }: addProps) => {
 type addFormProps = addProps & {
   handleClose: () => void;
   section_id: section;
+  dueDate: number;
 };
-function AddForm({ handleAdd, handleClose, section_id }: addFormProps) {
+function AddForm({
+  handleAdd,
+  handleClose,
+  section_id,
+  dueDate,
+  title,
+}: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const [enabled, setEnabled] = useState(false);
@@ -55,7 +65,8 @@ function AddForm({ handleAdd, handleClose, section_id }: addFormProps) {
         Completed: false,
         id: uuid(),
         timeCreated: Date.now(),
-      });
+        dueDate: dueDate,
+      } as task);
       handleClose();
     }
   }
@@ -67,7 +78,6 @@ function AddForm({ handleAdd, handleClose, section_id }: addFormProps) {
     }
   }
   function hasTitle(): boolean {
-    console.log(name.current?.value);
     return name.current?.value !== "";
   }
 
@@ -87,7 +97,7 @@ function AddForm({ handleAdd, handleClose, section_id }: addFormProps) {
         className="description"
         ref={description}
       />
-      <DateButton />
+      <DateButton title={title} />
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">
           Close
