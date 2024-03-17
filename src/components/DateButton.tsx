@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/dateButton.scss";
 import moment, { Moment } from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +8,18 @@ import { StringToKebabCase } from "@ilihub/string-to-kebab-case";
 
 type dateButtonProps = {
   title: string;
+  setDate: React.Dispatch<React.SetStateAction<number>>;
 };
-function DateButton({ title }: dateButtonProps) {
+const CUSTOM_FORMAT: moment.CalendarSpec = {
+  sameDay: "[Today]",
+  nextDay: "[Tomorrow]",
+  nextWeek: "[Next Week]",
+};
+function DateButton({ title, setDate }: dateButtonProps) {
   const currentClass = StringToKebabCase(title.toLowerCase());
-  const [Calendar, setCalendar] = useState<Moment | null>(moment());
-  const [MenuVisible, setMenuVisible] = useState(false);
+  const [Calendar, setCalendar] = useState<Moment | null>(moment()); // Moment Data
+  const [MenuVisible, setMenuVisible] = useState(false); // Actual rendered Date
+  const [dateText, setDateText] = useState(title);
   type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
   type stateEvent =
     | "Today"
@@ -20,6 +27,13 @@ function DateButton({ title }: dateButtonProps) {
     | "Next Weekend"
     | "Next Week"
     | Moment;
+
+  useEffect(() => {
+    if (moment.isMoment(Calendar)) {
+      setDateText(Calendar.calendar(null, CUSTOM_FORMAT));
+      setDate(Calendar.valueOf());
+    }
+  }, [Calendar]);
 
   function stateManager(input: stateEvent) {
     setMenuVisible(false);
@@ -59,7 +73,7 @@ function DateButton({ title }: dateButtonProps) {
         onClick={() => setMenuVisible(true)}
       >
         <i className="fa-regular fa-calendar icon"></i>
-        {title}
+        {dateText}
         <i className="fa-solid fa-x"></i>
       </Dropdown.Toggle>
       <Dropdown.Menu className="date-menu" show={MenuVisible}>

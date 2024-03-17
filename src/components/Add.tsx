@@ -4,14 +4,19 @@ import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import DateButton from "./DateButton.tsx";
-
+import "../styles/addSection.scss";
 export type addProps = {
   handleAdd: (Task: task) => void;
   section_id: section;
-  dueDate: number;
+  defaultDueDate: number;
   title: string;
 };
-export const Add = ({ handleAdd, section_id, dueDate, title }: addProps) => {
+export const Add = ({
+  handleAdd,
+  section_id,
+  defaultDueDate,
+  title,
+}: addProps) => {
   const [formOpen, setFormOpen] = useState(false);
   function handleClose() {
     setFormOpen(false);
@@ -33,7 +38,7 @@ export const Add = ({ handleAdd, section_id, dueDate, title }: addProps) => {
           handleAdd={handleAdd}
           handleClose={handleClose}
           section_id={section_id}
-          dueDate={dueDate}
+          defaultDueDate={defaultDueDate}
           title={title}
         />
       )}
@@ -43,18 +48,19 @@ export const Add = ({ handleAdd, section_id, dueDate, title }: addProps) => {
 type addFormProps = addProps & {
   handleClose: () => void;
   section_id: section;
-  dueDate: number;
+  defaultDueDate: number;
 };
 function AddForm({
   handleAdd,
   handleClose,
   section_id,
-  dueDate,
+  defaultDueDate,
   title,
 }: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const [enabled, setEnabled] = useState(false);
+  const [modifiedDueDate, setModifiedDueDate] = useState(defaultDueDate);
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (enabled) {
@@ -65,7 +71,7 @@ function AddForm({
         Completed: false,
         id: uuid(),
         timeCreated: Date.now(),
-        dueDate: dueDate,
+        dueDate: modifiedDueDate,
       } as task);
       handleClose();
     }
@@ -97,7 +103,7 @@ function AddForm({
         className="description"
         ref={description}
       />
-      <DateButton title={title} />
+      <DateButton title={title} setDate={setModifiedDueDate} />
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">
           Close

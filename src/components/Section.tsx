@@ -55,7 +55,7 @@ export default function Section({ title, section_id, dueDate }: SectionProps) {
           title={title}
           handleAdd={handleAdd}
           section_id={section_id}
-          dueDate={dueDate}
+          defaultDueDate={dueDate}
         />
         <TaskList
           tasks={getTasks(reducerTasks) as task[]}
