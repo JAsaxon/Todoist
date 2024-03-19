@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import DateButton from "./DateButton.tsx";
 import "../styles/addSection.scss";
+import PriorityButton from "./PriorityButton.tsx";
 export type addProps = {
   handleAdd: (Task: task) => void;
   section_id: section;
@@ -61,6 +62,7 @@ function AddForm({
   const description = useRef<HTMLTextAreaElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [modifiedDueDate, setModifiedDueDate] = useState(defaultDueDate);
+  const [priorty, setPriority] = useState(1);
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (enabled) {
@@ -105,6 +107,7 @@ function AddForm({
       />
       <div className="filtering-buttons">
         <DateButton title={title} setDate={setModifiedDueDate} />
+        <PriorityButton priority={priorty} setPriority={setPriority} />
       </div>
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">

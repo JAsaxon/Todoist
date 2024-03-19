@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/dateButton.scss";
 import moment, { Moment } from "moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Dropdown from "react-bootstrap/Dropdown";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { StringToKebabCase } from "@ilihub/string-to-kebab-case";
@@ -20,7 +19,7 @@ function DateButton({ title, setDate }: dateButtonProps) {
   const [Calendar, setCalendar] = useState<Moment | null>(moment()); // Moment Data
   const [MenuVisible, setMenuVisible] = useState(false); // Actual rendered Date
   const [dateText, setDateText] = useState(title);
-  type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
+  // type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
   type stateEvent =
     | "Today"
     | "Tomorrow"
