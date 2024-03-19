@@ -58,7 +58,7 @@ function AddForm({
   title,
 }: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
-  const description = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLTextAreaElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [modifiedDueDate, setModifiedDueDate] = useState(defaultDueDate);
   function handleSubmit(e: FormEvent) {
@@ -92,18 +92,20 @@ function AddForm({
       <input
         type="text"
         placeholder="Name of the task"
+        className="title"
         name="name"
         autoFocus
         ref={name}
         onChange={updateEnabled}
       />
-      <input
-        type="text"
+      <textarea
         placeholder="Description"
         className="description"
         ref={description}
       />
-      <DateButton title={title} setDate={setModifiedDueDate} />
+      <div className="filtering-buttons">
+        <DateButton title={title} setDate={setModifiedDueDate} />
+      </div>
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">
           Close

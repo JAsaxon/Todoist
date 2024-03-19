@@ -7,7 +7,6 @@ import { Task } from "./Task.tsx";
 import { useContext } from "react";
 import { TasksContext, TasksDispatchContext } from "../TasksContext.tsx";
 import { section } from "../types";
-import { DateCalendar } from "@mui/x-date-pickers";
 type SectionProps = {
   title: string;
   section_id: section;
@@ -31,9 +30,6 @@ export default function Section({ title, section_id, dueDate }: SectionProps) {
     } as payloadType);
   }
 
-  function removeTaskFilter(uuid: string): task[] {
-    return reducerTasks!.filter((el) => el.id !== uuid);
-  }
   function handleComplete(task: task) {
     Dispatch!({
       action: "HANDLE_COMPLETE",

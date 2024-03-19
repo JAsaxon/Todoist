@@ -66,7 +66,12 @@ function DateButton({ title, setDate }: dateButtonProps) {
   }
   console.log(MenuVisible);
   return (
-    <Dropdown className="date-dropdown" autoClose={false} show={MenuVisible}>
+    <Dropdown
+      className="date-dropdown"
+      autoClose={false}
+      show={MenuVisible}
+      drop="end"
+    >
       <Dropdown.Toggle
         id="dropdown-basic"
         className={`date-button ${currentClass}`}
