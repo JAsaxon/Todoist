@@ -70,7 +70,7 @@ function DateButton({ title, setDate }: dateButtonProps) {
       <Dropdown.Toggle
         id="dropdown-basic"
         className={`date-button ${currentClass}`}
-        onClick={() => setMenuVisible(true)}
+        onClick={() => setMenuVisible((prev) => !prev)}
       >
         <i className="fa-regular fa-calendar icon"></i>
         {dateText}

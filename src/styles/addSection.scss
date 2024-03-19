@@ -42,7 +42,7 @@
   color: #acacac;
   border: #d3d3d3 1px solid;
   display: flex;
-  height: 8em;
+  height: 9em;
   flex-direction: column;
   input {
     border: none;
@@ -55,6 +55,8 @@
     }
   }
   .buttons {
+    margin-top: 0.4em;
+    border-top: 1px solid $discrete-border-color;
     display: flex;
     width: 100%;
     flex-direction: row-reverse;

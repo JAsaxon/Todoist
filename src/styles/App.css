@@ -1,1 +1,1 @@
-body{background-color:#fff;font-family:"Inter"}.app-box{display:flex}.main-app{padding:7em 10em;flex-grow:1;display:flex;max-width:1000px;flex-direction:column;margin:0 auto}.task-list{display:flex;flex-direction:column}
+body{background-color:#fff;font-family:"Inter"}.app-box{display:flex}.main-app{padding:7em 10em;flex-grow:1;display:flex;max-width:1000px;flex-direction:column;margin:0 auto}.main-app h1{font-weight:600;padding-bottom:.3em;color:#070514;border-bottom:1px solid #070514}.task-list{display:flex;flex-direction:column}

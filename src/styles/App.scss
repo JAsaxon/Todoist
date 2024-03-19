@@ -14,6 +14,12 @@ body {
   max-width: 1000px;
   flex-direction: column;
   margin: 0 auto;
+  h1 {
+    font-weight: 600;
+    padding-bottom: 0.3em;
+    color: $title-text-color;
+    border-bottom: 1px solid $title-text-color;
+  }
 }
 
 .task-list {

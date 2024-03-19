@@ -32,18 +32,18 @@ export function Navbar() {
       <div className="times">
         <Link to="./">
           <div className={`time ${location === "/" ? "active" : ""}`}>
-            Today
+            <i className="fa-regular fa-calendar"></i> Today
           </div>
         </Link>
 
         <Link to="./week">
           <div className={`time ${location === "/week" ? "active" : ""}`}>
-            This Week
+            <i className="fa-solid fa-calendar-week"></i> Week
           </div>
         </Link>
         <Link to="./eventually">
           <div className={`time ${location === "/eventually" ? "active" : ""}`}>
-            Eventually
+            <i className="fa-solid fa-book"></i> Eventually
           </div>
         </Link>
       </div>
@@ -111,7 +111,7 @@ function CreateProjectModal({ show, handleClose }: createProjectModalProps) {
   return (
     <Modal show={show} onHide={handleClose} className="modal create-project">
       <Modal.Header closeButton>
-        <Modal.Title>Add Project</Modal.Title>
+        <Modal.Title> Add Project</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
