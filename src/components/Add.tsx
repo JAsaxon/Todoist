@@ -1,18 +1,27 @@
 import { FormEvent, useRef, useState } from "react";
-import { task } from "../types.ts";
+import { section, task } from "../types.ts";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
+import DateButton from "./DateButton.tsx";
+import "../styles/addSection.scss";
 export type addProps = {
   handleAdd: (Task: task) => void;
+  section_id: section;
+  defaultDueDate: number;
+  title: string;
 };
-export const Add = ({ handleAdd }: addProps) => {
+export const Add = ({
+  handleAdd,
+  section_id,
+  defaultDueDate,
+  title,
+}: addProps) => {
   const [formOpen, setFormOpen] = useState(false);
   function handleClose() {
-    console.log("y58r", formOpen);
     setFormOpen(false);
   }
+
   return (
     <div className="add-section">
       {!formOpen && (
@@ -24,28 +33,46 @@ export const Add = ({ handleAdd }: addProps) => {
           <input type="text" className="text" placeholder="Add task..." />
         </div>
       )}
-      {formOpen && <AddForm handleAdd={handleAdd} handleClose={handleClose} />}
+      {formOpen && (
+        <AddForm
+          handleAdd={handleAdd}
+          handleClose={handleClose}
+          section_id={section_id}
+          defaultDueDate={defaultDueDate}
+          title={title}
+        />
+      )}
     </div>
   );
 };
 type addFormProps = addProps & {
   handleClose: () => void;
+  section_id: section;
+  defaultDueDate: number;
 };
-function AddForm({ handleAdd, handleClose }: addFormProps) {
+function AddForm({
+  handleAdd,
+  handleClose,
+  section_id,
+  defaultDueDate,
+  title,
+}: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const [enabled, setEnabled] = useState(false);
+  const [modifiedDueDate, setModifiedDueDate] = useState(defaultDueDate);
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (enabled) {
       handleAdd({
         Title: name.current!.value,
         Description: description.current!.value,
-        Section: "TODAY",
+        Section: section_id,
         Completed: false,
         id: uuid(),
         timeCreated: Date.now(),
-      });
+        dueDate: modifiedDueDate,
+      } as task);
       handleClose();
     }
   }
@@ -57,7 +84,6 @@ function AddForm({ handleAdd, handleClose }: addFormProps) {
     }
   }
   function hasTitle(): boolean {
-    console.log(name.current?.value);
     return name.current?.value !== "";
   }
 
@@ -77,6 +103,7 @@ function AddForm({ handleAdd, handleClose }: addFormProps) {
         className="description"
         ref={description}
       />
+      <DateButton title={title} setDate={setModifiedDueDate} />
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">
           Close

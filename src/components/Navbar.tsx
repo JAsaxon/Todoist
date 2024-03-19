@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useHover } from "react-use";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -23,7 +23,7 @@ import ColorSelection from "./ColorSelection";
 
 export function Navbar() {
   const [createProject, setCreateProject] = useState(false);
-
+  const location = useLocation().pathname;
   return (
     <div className="sidebar">
       <div className="username">
@@ -31,13 +31,21 @@ export function Navbar() {
       </div>
       <div className="times">
         <Link to="./">
-          <div className="time active">Today</div>
+          <div className={`time ${location === "/" ? "active" : ""}`}>
+            Today
+          </div>
         </Link>
 
         <Link to="./week">
-          <div className="time">This Week</div>
+          <div className={`time ${location === "/week" ? "active" : ""}`}>
+            This Week
+          </div>
         </Link>
-        <div className="time">Eventually</div>
+        <Link to="./eventually">
+          <div className={`time ${location === "/eventually" ? "active" : ""}`}>
+            Eventually
+          </div>
+        </Link>
       </div>
 
       <CreateProjectModal

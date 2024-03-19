@@ -5,15 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { task } from "../types.ts";
 export type taskJsxProps = {
   task: task;
-  deleteTask: (uuid: string) => void;
-  completeTask: (uuid: string) => void;
+  deleteTask: (task: task) => void;
+  completeTask: (task: task) => void;
 };
 export function Task({ task, completeTask, deleteTask }: taskJsxProps) {
   const [hovered, setHovered] = useState(false);
 
   const handleHoverEnter = () => setHovered(true);
   const handleHoverLeave = () => setHovered(false);
-  console.log(hovered);
   return (
     <div
       className="task-wrapper"
@@ -22,12 +21,12 @@ export function Task({ task, completeTask, deleteTask }: taskJsxProps) {
     >
       <div
         className={`task ${task.Completed}`}
-        onClick={() => completeTask(task.id)}
+        onClick={() => completeTask(task)}
       >
         <input
           type="radio"
-          name="task"
-          id={task.Title}
+          name={task.id}
+          id={task.id}
           checked={task.Completed}
         />
         <div>
@@ -36,7 +35,7 @@ export function Task({ task, completeTask, deleteTask }: taskJsxProps) {
         </div>
       </div>
       <div className={`utilities ${hovered ? "hover" : ""}`}>
-        <div className="close utility" onClick={() => deleteTask(task.id)}>
+        <div className="close utility" onClick={() => deleteTask(task)}>
           <FontAwesomeIcon icon={faTrash} />
         </div>
       </div>
