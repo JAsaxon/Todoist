@@ -24,7 +24,7 @@ function App() {
     <div>
       <TasksContext.Provider value={tasks}>
         <TasksDispatchContext.Provider value={dispatch}>
-          <BrowserRouter>
+          <BrowserRouter basename="/Todoist">
             <div className="app-box">
               <Navbar />
 
