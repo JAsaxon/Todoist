@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Today from "./Today";
 import ThisWeek from "./ThisWeek";
 import { Navbar } from "./components/Navbar";
@@ -24,17 +24,15 @@ function App() {
     <div>
       <TasksContext.Provider value={tasks}>
         <TasksDispatchContext.Provider value={dispatch}>
-          <BrowserRouter basename="/Todoist">
-            <div className="app-box">
-              <Navbar />
+          <div className="app-box">
+            <Navbar />
 
-              <Routes>
-                <Route path="/" element={<Today />} />
-                <Route path="/week" element={<ThisWeek />} />
-                <Route path="/project/:id" element={<SectionProject />} />
-              </Routes>
-            </div>
-          </BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Today />} />
+              <Route path="/week" element={<ThisWeek />} />
+              <Route path="/project/:id" element={<SectionProject />} />
+            </Routes>
+          </div>
         </TasksDispatchContext.Provider>
       </TasksContext.Provider>
     </div>

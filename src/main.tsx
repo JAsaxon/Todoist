@@ -9,10 +9,13 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { BrowserRouter } from "react-router-dom";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <LocalizationProvider dateAdapter={AdapterMoment}>
-      <App />
-    </LocalizationProvider>
+    <BrowserRouter basename="/Todoist">
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <App />
+      </LocalizationProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
