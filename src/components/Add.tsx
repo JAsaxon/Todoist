@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import DateButton from "./DateButton.tsx";
 import "../styles/addSection.scss";
+import PriorityButton from "./PriorityButton.tsx";
 export type addProps = {
   handleAdd: (Task: task) => void;
   section_id: section;
@@ -58,9 +59,10 @@ function AddForm({
   title,
 }: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
-  const description = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLTextAreaElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [modifiedDueDate, setModifiedDueDate] = useState(defaultDueDate);
+  const [priority, setPriority] = useState(4);
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (enabled) {
@@ -72,6 +74,7 @@ function AddForm({
         id: uuid(),
         timeCreated: Date.now(),
         dueDate: modifiedDueDate,
+        priority: priority,
       } as task);
       handleClose();
     }
@@ -92,18 +95,21 @@ function AddForm({
       <input
         type="text"
         placeholder="Name of the task"
+        className="title"
         name="name"
         autoFocus
         ref={name}
         onChange={updateEnabled}
       />
-      <input
-        type="text"
+      <textarea
         placeholder="Description"
         className="description"
         ref={description}
       />
-      <DateButton title={title} setDate={setModifiedDueDate} />
+      <div className="filtering-buttons">
+        <DateButton title={title} setDate={setModifiedDueDate} />
+        <PriorityButton priority={priority} setPriority={setPriority} />
+      </div>
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">
           Close

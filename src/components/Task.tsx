@@ -3,6 +3,7 @@ import "../styles/Task.scss";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { task } from "../types.ts";
+import moment from "moment";
 export type taskJsxProps = {
   task: task;
   deleteTask: (task: task) => void;
@@ -32,6 +33,7 @@ export function Task({ task, completeTask, deleteTask }: taskJsxProps) {
         <div>
           <h1>{task.Title}</h1>
           <p>{task.Description}</p>
+          <DateInfo date={task.dueDate} />
         </div>
       </div>
       <div className={`utilities ${hovered ? "hover" : ""}`}>
@@ -41,4 +43,12 @@ export function Task({ task, completeTask, deleteTask }: taskJsxProps) {
       </div>
     </div>
   );
+}
+type DateInfoProps = {
+  date: number;
+};
+function DateInfo({ date }: DateInfoProps) {
+  const isLate = moment(date).isBefore(moment()) ? "late" : "";
+  console.log(moment(date).isAfter(moment()));
+  return <p className={isLate}>{moment(date).calendar()}</p>;
 }

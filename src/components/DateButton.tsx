@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "../styles/dateButton.scss";
 import moment, { Moment } from "moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Dropdown from "react-bootstrap/Dropdown";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { StringToKebabCase } from "@ilihub/string-to-kebab-case";
 
-type dateButtonProps = {
-  title: string;
-  setDate: React.Dispatch<React.SetStateAction<number>>;
-};
 const CUSTOM_FORMAT: moment.CalendarSpec = {
   sameDay: "[Today]",
   nextDay: "[Tomorrow]",
   nextWeek: "[Next Week]",
 };
+const defaultsToMoments = {
+  Today: moment(),
+  "This week": moment().day(7),
+};
+type dateButtonProps = {
+  title: string;
+  setDate: React.Dispatch<React.SetStateAction<number>>;
+};
 function DateButton({ title, setDate }: dateButtonProps) {
   const currentClass = StringToKebabCase(title.toLowerCase());
-  const [Calendar, setCalendar] = useState<Moment | null>(moment()); // Moment Data
+  const [Calendar, setCalendar] = useState<Moment | null>(null); // Moment Data
   const [MenuVisible, setMenuVisible] = useState(false); // Actual rendered Date
   const [dateText, setDateText] = useState(title);
-  type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
+  // type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
   type stateEvent =
     | "Today"
     | "Tomorrow"
@@ -32,32 +35,41 @@ function DateButton({ title, setDate }: dateButtonProps) {
     if (moment.isMoment(Calendar)) {
       setDateText(Calendar.calendar(null, CUSTOM_FORMAT));
       setDate(Calendar.valueOf());
+    } else {
+      //! Messy solution improve later
+      if (title === "Today") {
+        setDate(moment().endOf("day").valueOf());
+      }
+      if (title === "This Week") {
+        setDate(moment().day(7).endOf("day").valueOf());
+      }
+      console.error(title, "ERROR: TITLE IS INVALID DATE");
     }
   }, [Calendar]);
 
   function stateManager(input: stateEvent) {
     setMenuVisible(false);
-    // if input is a moment
     if (typeof input === "string") {
       switch (input) {
         case "Today":
-          setCalendar(moment());
+          setCalendar(moment().endOf("day"));
           break;
         case "Next Week":
-          setCalendar(moment().day(8));
+          setCalendar(moment().day(8).endOf("day"));
 
           break;
         case "Next Weekend":
-          setCalendar(moment().day(7));
+          setCalendar(moment().day(7).endOf("day"));
           break;
         case "Tomorrow":
-          console.log("x");
-          setCalendar(moment().add(1, "d"));
+          setCalendar(moment().add(1, "d").endOf("day"));
           break;
       }
       return;
     }
     setMenuVisible(false);
+    // if input is a moment
+
     if (moment.isMoment(input)) {
       setCalendar(input);
       return;
@@ -66,14 +78,19 @@ function DateButton({ title, setDate }: dateButtonProps) {
   }
   console.log(MenuVisible);
   return (
-    <Dropdown className="date-dropdown" autoClose={false} show={MenuVisible}>
+    <Dropdown
+      className="date-dropdown"
+      autoClose={false}
+      show={MenuVisible}
+      drop="end"
+    >
       <Dropdown.Toggle
         id="dropdown-basic"
         className={`date-button ${currentClass}`}
-        onClick={() => setMenuVisible(true)}
+        onClick={() => setMenuVisible((prev) => !prev)}
       >
         <i className="fa-regular fa-calendar icon"></i>
-        {dateText}
+        {dateText ?? title}
         <i className="fa-solid fa-x"></i>
       </Dropdown.Toggle>
       <Dropdown.Menu className="date-menu" show={MenuVisible}>

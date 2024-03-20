@@ -3,7 +3,7 @@ import Today from "./Today";
 import ThisWeek from "./ThisWeek";
 import { Navbar } from "./components/Navbar";
 import { TasksContext, TasksDispatchContext } from "./TasksContext";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { reducer } from "./taskReducer";
 
 const localTasks = localStorage.getItem("TASKS");
@@ -14,7 +14,11 @@ const parsedLocalTasks = JSON.parse(localTasks!);
 console.log(parsedLocalTasks, "EEE");
 function App() {
   // @ts-ignore
-  const [tasks, dispatch] = useReducer(reducer, parsedLocalTasks);
+  const [tasks, dispatch] = useReducer(reducer, parsedLocalTasks ?? []);
+  useEffect(() => {
+    localStorage.setItem("TASKS", JSON.stringify(tasks));
+  }, [tasks]);
+
   return (
     <div>
       <TasksContext.Provider value={tasks}>

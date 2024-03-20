@@ -1,6 +1,7 @@
 @use "variables" as *;
 $primary: $accent;
-$secondary: $text-color-secondary;
+$secondary: rgb(228, 228, 228);
+$info: blue;
 $font-family-sans-serif: "Inter";
 $font-family-base: "Inter";
 $font-family-monospace: "Inter";

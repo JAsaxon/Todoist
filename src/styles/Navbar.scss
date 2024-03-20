@@ -1,7 +1,7 @@
 @use "./variables.scss" as *;
 
 .sidebar {
-  background-color: black;
+  background-color: #171717;
   min-height: 100vh;
   width: 290px;
   color: white;
@@ -23,24 +23,31 @@
   .times {
     margin: 0.5em;
     font-size: 24px;
-    color: $text-color-secondary-dark;
+    color: rgb(212, 212, 212);
     a {
       text-decoration: none;
       color: inherit;
     }
     .time {
-      padding: 1em 2em;
+      display: flex;
+
+      align-items: center;
+      i {
+        padding: 1em;
+      }
     }
     .active {
-      border-radius: 64px;
+      border-radius: 5px;
       background-color: $accent-translucent;
-      color: $text-on-accent;
+      color: white;
     }
   }
   .section-title {
     font-size: 1.2rem;
-    color: #acacac;
-    margin-bottom: 1em;
+    color: #ffffff;
+    border-bottom: white 1px solid;
+
+    padding-bottom: 1em;
     cursor: pointer;
     display: flex;
     margin: 1em;

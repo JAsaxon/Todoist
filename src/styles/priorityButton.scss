@@ -1,0 +1,28 @@
+@use "variables" as *;
+
+.priority-dropdown {
+  button {
+    color: black;
+    font-weight: 600;
+    &:hover {
+      color: black !important;
+    }
+    span {
+      margin-right: 0.5em;
+    }
+  }
+  .fa-flag {
+    margin-right: 0.4em;
+  }
+  .one {
+    color: $red-900;
+  }
+  .two {
+    color: $orange-900;
+  }
+  .three {
+    color: $blue-900;
+  }
+  .four {
+  }
+}
