@@ -11,12 +11,14 @@ export type addProps = {
   section_id: section;
   defaultDueDate: number;
   title: string;
+  isProject?: boolean;
 };
 export const Add = ({
   handleAdd,
   section_id,
   defaultDueDate,
   title,
+  isProject,
 }: addProps) => {
   const [formOpen, setFormOpen] = useState(false);
   function handleClose() {
@@ -39,6 +41,7 @@ export const Add = ({
           handleAdd={handleAdd}
           handleClose={handleClose}
           section_id={section_id}
+          isProject={isProject}
           defaultDueDate={defaultDueDate}
           title={title}
         />
@@ -57,6 +60,7 @@ function AddForm({
   section_id,
   defaultDueDate,
   title,
+  isProject,
 }: addFormProps) {
   const name = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLTextAreaElement>(null);
@@ -107,7 +111,11 @@ function AddForm({
         ref={description}
       />
       <div className="filtering-buttons">
-        <DateButton title={title} setDate={setModifiedDueDate} />
+        <DateButton
+          title={title}
+          setDate={setModifiedDueDate}
+          isProject={isProject}
+        />
         <PriorityButton priority={priority} setPriority={setPriority} />
       </div>
       <div className="buttons">

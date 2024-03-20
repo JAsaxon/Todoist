@@ -17,12 +17,15 @@ const defaultsToMoments = {
 type dateButtonProps = {
   title: string;
   setDate: React.Dispatch<React.SetStateAction<number>>;
+  isProject?: boolean;
 };
-function DateButton({ title, setDate }: dateButtonProps) {
+function DateButton({ title, setDate, isProject }: dateButtonProps) {
+  console.log("IS PROJECT:", !!isProject);
+  const fallBackDate = isProject ? "Today" : title;
   const currentClass = StringToKebabCase(title.toLowerCase());
   const [Calendar, setCalendar] = useState<Moment | null>(null); // Moment Data
   const [MenuVisible, setMenuVisible] = useState(false); // Actual rendered Date
-  const [dateText, setDateText] = useState(title);
+  const [dateText, setDateText] = useState<string>(fallBackDate);
   // type presets = "Today" | "Tomorrow" | "Next Weekend" | "Next Week";
   type stateEvent =
     | "Today"
@@ -77,6 +80,7 @@ function DateButton({ title, setDate }: dateButtonProps) {
     console.error("NOT A VALID INPUT");
   }
   console.log(MenuVisible);
+
   return (
     <Dropdown
       className="date-dropdown"
@@ -90,7 +94,7 @@ function DateButton({ title, setDate }: dateButtonProps) {
         onClick={() => setMenuVisible((prev) => !prev)}
       >
         <i className="fa-regular fa-calendar icon"></i>
-        {dateText ?? title}
+        {dateText ?? "cheese"}
         <i className="fa-solid fa-x"></i>
       </Dropdown.Toggle>
       <Dropdown.Menu className="date-menu" show={MenuVisible}>
