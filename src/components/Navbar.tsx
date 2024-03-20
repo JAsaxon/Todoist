@@ -132,16 +132,19 @@ function CreateProjectModal({ show, handleClose }: createProjectModalProps) {
     </Modal>
   );
 }
+
 function Project({ text, color }: projectProps) {
   const element = (hovered: boolean) => (
-    <div className={`project color${color}`}>
-      <div className="text">{text}</div>
-      {hovered && (
-        <span className="icon-more">
-          <FontAwesomeIcon icon={faEllipsis} />
-        </span>
-      )}
-    </div>
+    <Link to={`project/${encodeURIComponent(text)}`}>
+      <div className={`project color${color}`}>
+        <div className="text">{text}</div>
+        {hovered && (
+          <span className="icon-more">
+            <FontAwesomeIcon icon={faEllipsis} />
+          </span>
+        )}
+      </div>
+    </Link>
   );
   const [hoverable] = useHover(element);
 

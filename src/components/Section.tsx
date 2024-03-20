@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/App.scss";
 import { task, taskFunction } from "../types.ts";
 import { payloadType } from "../taskReducer.ts";
@@ -12,19 +11,30 @@ type SectionProps = {
   title: string;
   section_id: section;
   dueDate: number;
+  isProject?: boolean;
 };
 type possibleTitles = "Today" | "This Week";
-export const titleToDays = {
+const titleToDays = {
   Today: moment().add(1, "days").startOf("day"),
   "This Week": moment().day(7).startOf("day"),
 };
-export default function Section({ title, section_id, dueDate }: SectionProps) {
+export default function Section({
+  title,
+  section_id,
+  dueDate,
+  isProject,
+}: SectionProps) {
   const [reducerTasks, Dispatch] = [
     useContext(TasksContext),
     useContext(TasksDispatchContext),
   ];
   console.log(reducerTasks);
   function getTasks(tasks: task[]) {
+    if (isProject) {
+      return tasks.filter((task) => {
+        return task.Section === section_id;
+      });
+    }
     return tasks.filter((task) => {
       return moment(task.dueDate).isBefore(
         moment(titleToDays[title as possibleTitles])
@@ -59,6 +69,7 @@ export default function Section({ title, section_id, dueDate }: SectionProps) {
           title={title}
           handleAdd={handleAdd}
           section_id={section_id}
+          isProject={isProject}
           defaultDueDate={dueDate}
         />
         <TaskList

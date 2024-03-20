@@ -5,6 +5,7 @@ import { Navbar } from "./components/Navbar";
 import { TasksContext, TasksDispatchContext } from "./TasksContext";
 import { useEffect, useReducer } from "react";
 import { reducer } from "./taskReducer";
+import SectionProject from "./components/SectionProject";
 
 const localTasks = localStorage.getItem("TASKS");
 if (localTasks === null) {
@@ -30,6 +31,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Today />} />
                 <Route path="/week" element={<ThisWeek />} />
+                <Route path="/project/:id" element={<SectionProject />} />
               </Routes>
             </div>
           </BrowserRouter>
