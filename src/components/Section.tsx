@@ -7,20 +7,28 @@ import { Task } from "./Task.tsx";
 import { useContext } from "react";
 import { TasksContext, TasksDispatchContext } from "../TasksContext.tsx";
 import { section } from "../types";
+import moment from "moment";
 type SectionProps = {
   title: string;
   section_id: section;
   dueDate: number;
 };
-
+type possibleTitles = "Today" | "This Week";
+export const titleToDays = {
+  Today: moment().add(1, "days").startOf("day"),
+  "This Week": moment().day(7).startOf("day"),
+};
 export default function Section({ title, section_id, dueDate }: SectionProps) {
   const [reducerTasks, Dispatch] = [
     useContext(TasksContext),
     useContext(TasksDispatchContext),
   ];
+  console.log(reducerTasks);
   function getTasks(tasks: task[]) {
     return tasks.filter((task) => {
-      return task.Section === section_id;
+      return moment(task.dueDate).isBefore(
+        moment(titleToDays[title as possibleTitles])
+      );
     });
   }
   function handleAdd(task: task) {
@@ -74,6 +82,7 @@ function TaskList({ tasks, completeTask, deleteTask }: taskListProps) {
       {tasks
         .slice()
         .reverse()
+        .sort((a, b) => a.dueDate - b.dueDate)
         .map((task: task) => {
           return (
             <Task

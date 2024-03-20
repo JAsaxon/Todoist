@@ -62,7 +62,7 @@ function AddForm({
   const description = useRef<HTMLTextAreaElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [modifiedDueDate, setModifiedDueDate] = useState(defaultDueDate);
-  const [priorty, setPriority] = useState(1);
+  const [priority, setPriority] = useState(4);
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (enabled) {
@@ -74,6 +74,7 @@ function AddForm({
         id: uuid(),
         timeCreated: Date.now(),
         dueDate: modifiedDueDate,
+        priority: priority,
       } as task);
       handleClose();
     }
@@ -107,7 +108,7 @@ function AddForm({
       />
       <div className="filtering-buttons">
         <DateButton title={title} setDate={setModifiedDueDate} />
-        <PriorityButton priority={priorty} setPriority={setPriority} />
+        <PriorityButton priority={priority} setPriority={setPriority} />
       </div>
       <div className="buttons">
         <button onClick={() => handleClose()} type="button">

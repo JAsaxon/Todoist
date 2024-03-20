@@ -60,10 +60,15 @@
       color: black;
       font-weight: 800;
     }
+
     p {
       color: #141414;
     }
+    .late {
+      color: rgb(216, 41, 41);
+    }
   }
+
   &.true {
     * {
       text-decoration: line-through;
@@ -71,5 +76,9 @@
     div {
       opacity: 0.6;
     }
+  }
+  .late {
+    font-weight: 600;
+    color: rgb(169, 49, 49);
   }
 }
