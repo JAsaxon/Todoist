@@ -12,4 +12,4 @@ npm run dev
 
 # Contributing
 
-Fork repo, Pull request das it
+To contribute please fork and merge from the development branch! Anyone is welcome!
