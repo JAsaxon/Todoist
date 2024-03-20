@@ -16,7 +16,7 @@ type SectionProps = {
 type possibleTitles = "Today" | "This Week";
 const titleToDays = {
   Today: moment().add(1, "days").startOf("day"),
-  "This Week": moment().day(7).startOf("day"),
+  "This Week": moment().day(7).endOf("day"),
 };
 export default function Section({
   title,
@@ -36,7 +36,7 @@ export default function Section({
       });
     }
     return tasks.filter((task) => {
-      return moment(task.dueDate).isBefore(
+      return moment(task.dueDate).isSameOrBefore(
         moment(titleToDays[title as possibleTitles])
       );
     });
