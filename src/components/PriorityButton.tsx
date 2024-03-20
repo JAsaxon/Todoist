@@ -1,6 +1,4 @@
-import { DateCalendar } from "@mui/x-date-pickers";
-import React from "react";
-import { Button, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import "../styles/priorityButton.scss";
 type PriorityButtonProps = {
   priority: number;

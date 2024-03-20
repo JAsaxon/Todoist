@@ -10,10 +10,10 @@ const CUSTOM_FORMAT: moment.CalendarSpec = {
   nextDay: "[Tomorrow]",
   nextWeek: "[Next Week]",
 };
-const defaultsToMoments = {
-  Today: moment(),
-  "This week": moment().day(7),
-};
+// const defaultsToMoments = {
+//   Today: moment(),
+//   "This week": moment().day(7),
+// };
 type dateButtonProps = {
   title: string;
   setDate: React.Dispatch<React.SetStateAction<number>>;

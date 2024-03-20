@@ -10,14 +10,13 @@ import "../styles/Navbar.scss";
 import { projectProps } from "../App";
 import {
   Accordion,
-  AccordionContext,
   Button,
   Card,
   Modal,
   useAccordionButton,
   Form,
 } from "react-bootstrap";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AccordionEventKey } from "react-bootstrap/esm/AccordionContext";
 import ColorSelection from "./ColorSelection";
 
@@ -78,7 +77,7 @@ type ProjectsToggle = {
   setModal: Dispatch<SetStateAction<boolean>>;
 };
 function ProjectsToggle({ eventKey, callback, setModal }: ProjectsToggle) {
-  const { activeEventKey } = useContext(AccordionContext);
+  // const { activeEventKey } = useContext(AccordionContext);
 
   const decoratedOnClick = useAccordionButton(
     eventKey,
@@ -103,7 +102,7 @@ function ProjectsToggle({ eventKey, callback, setModal }: ProjectsToggle) {
   const [HoverableSectionTitle] = useHover(sectionTitle);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const isCurrentEventKey = activeEventKey === eventKey;
+  // const isCurrentEventKey = activeEventKey === eventKey;
 
   return <div>{HoverableSectionTitle}</div>;
 }
