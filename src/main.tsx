@@ -10,6 +10,9 @@ import "@fontsource/roboto/700.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { HashRouter } from "react-router-dom";
+//* apparently github pages doesn't work with browser router so HashRouter
+//* Is needed so it doesn't bug out, probably could be reverted if we ever move
+//* to another hosting provider
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HashRouter>
