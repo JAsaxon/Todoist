@@ -1,33 +1,76 @@
-import { Form } from "react-bootstrap";
-import "../styles/colorSelect.scss";
-import { useState } from "react";
-const COLORS = {
-  Yellow: "#ffdc5f",
-  Green: "#71dc7b",
-  Blue: "#58c3ff",
-} as const;
-type colorsKeys = keyof typeof COLORS;
-const colors = Object.values(COLORS);
-export type Color = (typeof colors)[number];
-function ColorSelection() {
-  const [currentColor, setCurrentColor] = useState<Color>(COLORS.Yellow);
-  const style = { "--color-attr": currentColor } as React.CSSProperties;
-  return (
-    <div className="select-wrapper" style={style}>
-      <Form.Select aria-label="Default select example" className="color-select">
-        {(Object.keys(COLORS) as colorsKeys[]).map((color: colorsKeys) => {
-          return (
-            <option
-              style={{ color: `${COLORS[color]}` }}
-              onClick={() => setCurrentColor(COLORS[color])}
-            >
-              {color}
-            </option>
-          );
-        })}
-      </Form.Select>
-    </div>
-  );
-}
+import React from "react";
+import chroma from "chroma-js";
+import { colorObject } from "../types";
+import { ColourOption, colourOptions } from "../data/colorData";
+import Select, { StylesConfig } from "react-select";
+import { borderRadius } from "@mui/system";
+//! Stolen from the react-select examples, no clue how it works :p
+const dot = (color = "transparent") => ({
+  alignItems: "center",
+  display: "flex",
 
-export default ColorSelection;
+  ":before": {
+    backgroundColor: color,
+    borderRadius: 10,
+    content: '" "',
+    display: "block",
+    marginRight: 8,
+    height: 10,
+    width: 10,
+  },
+});
+
+const colourStyles: StylesConfig<ColourOption> = {
+  control: (styles) => ({ ...styles, backgroundColor: "white" }),
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    const color = chroma(data.color);
+    const selection = chroma("gray");
+    return {
+      ...styles,
+      backgroundColor: isDisabled
+        ? undefined
+        : isSelected
+        ? color.alpha(0.3).css()
+        : isFocused
+        ? selection.alpha(0.2).css()
+        : undefined,
+      color: isDisabled
+        ? "#ccc"
+        : isSelected
+        ? chroma.contrast("black", "white") < 2
+          ? "white"
+          : "black"
+        : "black",
+      cursor: isDisabled ? "not-allowed" : "default",
+
+      ":active": {
+        ...styles[":active"],
+        backgroundColor: !isDisabled ? (isSelected ? "red" : "red") : "red",
+      },
+      ":before": {
+        content: "''",
+        width: "10px",
+        marginRight: "10px",
+        height: "10px",
+        display: "inline-block",
+        backgroundColor: color.css(),
+        borderRadius: "50%",
+      },
+    };
+  },
+  input: (styles) => ({ ...styles, ...dot() }),
+  placeholder: (styles) => ({ ...styles, ...dot("#ccc") }),
+  singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
+};
+type colorSelectionProps = {
+  handleChange: (obj: any) => void;
+};
+
+export default ({ handleChange }: colorSelectionProps) => (
+  <Select
+    defaultValue={colourOptions[2]}
+    options={colourOptions}
+    onChange={handleChange}
+    styles={colourStyles}
+  />
+);

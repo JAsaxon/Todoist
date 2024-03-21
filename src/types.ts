@@ -10,3 +10,4 @@ export type task = {
 export type section = "TODAY" | "WEEK" | string;
 export type storageKeys = "TASKS";
 export type taskFunction = (task: task) => void;
+export type colorObject = { value: string; label: string; color: string };

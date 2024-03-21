@@ -8,17 +8,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/Navbar.scss";
 import { projectProps } from "../App";
-import {
-  Accordion,
-  Button,
-  Card,
-  Modal,
-  useAccordionButton,
-  Form,
-} from "react-bootstrap";
+import { Accordion, Card, useAccordionButton } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AccordionEventKey } from "react-bootstrap/esm/AccordionContext";
-import ColorSelection from "./ColorSelection";
+import { CreateProjectModal } from "./CreateProjectModal";
 
 export function Navbar() {
   const [createProject, setCreateProject] = useState(false);
@@ -67,7 +60,7 @@ export function Navbar() {
   );
 }
 
-type createProjectModalProps = {
+export type createProjectModalProps = {
   show: boolean;
   handleClose: () => void;
 };
@@ -106,32 +99,6 @@ function ProjectsToggle({ eventKey, callback, setModal }: ProjectsToggle) {
 
   return <div>{HoverableSectionTitle}</div>;
 }
-function CreateProjectModal({ show, handleClose }: createProjectModalProps) {
-  return (
-    <Modal show={show} onHide={handleClose} className="modal create-project">
-      <Modal.Header closeButton>
-        <Modal.Title> Add Project</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Your project..." />
-          <Form.Label>Color</Form.Label>
-          <ColorSelection />
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
 function Project({ text, color }: projectProps) {
   const location = useLocation().pathname;
   console.log(location);
