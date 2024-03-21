@@ -17,7 +17,13 @@ type possibleTitles = "Today" | "This Week";
 const titleToDays = {
   Today: moment().add(1, "days").startOf("day"),
   "This Week": moment().day(7).endOf("day"),
+  Eventually: moment().add(1, "y").endOf("day"),
 };
+/*
+!The dueDate needs to be passed as an unix millisecond count 
+*If you need to use it without a dueDate use the section project component instead
+
+*/
 export default function Section({
   title,
   section_id,
@@ -30,11 +36,13 @@ export default function Section({
   ];
   console.log(reducerTasks);
   function getTasks(tasks: task[]) {
+    // If is project care about the section_id
     if (isProject) {
       return tasks.filter((task) => {
         return task.Section === section_id;
       });
     }
+    // If is time based section check the dueDate instead
     return tasks.filter((task) => {
       return moment(task.dueDate).isSameOrBefore(
         moment(titleToDays[title as possibleTitles])

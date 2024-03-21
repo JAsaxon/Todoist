@@ -74,7 +74,7 @@ function DateButton({ title, setDate, isProject }: dateButtonProps) {
     // if input is a moment
 
     if (moment.isMoment(input)) {
-      setCalendar(input);
+      setCalendar(input.endOf("day"));
       return;
     }
     console.error("NOT A VALID INPUT");
