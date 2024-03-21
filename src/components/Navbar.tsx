@@ -133,9 +133,15 @@ function CreateProjectModal({ show, handleClose }: createProjectModalProps) {
 }
 
 function Project({ text, color }: projectProps) {
+  const location = useLocation().pathname;
+  console.log(location);
   const element = (hovered: boolean) => (
     <Link to={`project/${encodeURIComponent(text)}`}>
-      <div className={`project color${color}`}>
+      <div
+        className={`project color${color} ${
+          location === `/project/${encodeURIComponent(text)}` ? "active" : ""
+        } `}
+      >
         <div className="text">{text}</div>
         {hovered && (
           <span className="icon-more">

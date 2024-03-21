@@ -74,7 +74,7 @@
   }
   .project {
     font-size: 1em;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.5em;
     color: rgb(255, 255, 255);
     font-weight: 500;
     width: 100%;
@@ -86,7 +86,7 @@
     transition-duration: 300ms;
 
     .text {
-      padding: 1em;
+      padding: 0.8em;
       padding-left: 0;
     }
     .icon-more {
@@ -94,19 +94,28 @@
       width: 40px;
       margin-left: auto;
       display: flex;
+      margin-right: 0.2em;
       justify-content: center;
       * {
         margin-top: auto;
         margin-bottom: auto;
       }
       &:hover {
-        background-color: rgba(34, 34, 34, 0.493);
+        background-color: rgba(0, 0, 0, 0.096);
+        border-radius: 0.5em;
       }
     }
+
+    &:hover {
+      background-color: rgba(29, 29, 29, 0.726);
+    }
+    &.active {
+      border-radius: 5px;
+      background-color: $accent-translucent;
+      color: white;
+    }
   }
-  .project:hover {
-    background-color: rgba(29, 29, 29, 0.726);
-  }
+
   .project::before {
     content: "#";
     padding-right: 1em;
