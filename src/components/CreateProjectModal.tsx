@@ -1,14 +1,30 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import ColorSelection from "./ColorSelection";
-import { createProjectModalProps } from "./Navbar";
 import { useState } from "react";
-
+import { projectType } from "../types";
+type createProjectModalProps = {
+  show: boolean;
+  handleClose: () => void;
+  handleAdd: (project: projectType) => void;
+};
 export function CreateProjectModal({
   show,
   handleClose,
+  handleAdd,
 }: createProjectModalProps) {
+  const [title, setTitle] = useState("");
   const [color, setColor] = useState("");
   console.log("H", color);
+  function handleSubmit() {
+    handleAdd({
+      title: "",
+      color: {
+        value: "",
+        label: "",
+        color: color,
+      },
+    });
+  }
   return (
     <Modal show={show} onHide={handleClose} className="modal create-project">
       <Modal.Header closeButton>

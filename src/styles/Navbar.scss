@@ -120,15 +120,7 @@
     content: "#";
     padding-right: 1em;
     margin-left: 2em;
-  }
-  .color1::before {
-    color: $tag-color-1;
-  }
-  .color2::before {
-    color: $tag-color-2;
-  }
-  .color3::before {
-    color: $tag-color-3;
+    color: var(--color-attr);
   }
 }
 .modal {

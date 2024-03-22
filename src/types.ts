@@ -1,3 +1,5 @@
+import { ColourOption } from "./data/colorData";
+
 export type task = {
   Title: string;
   Description: string;
@@ -11,3 +13,8 @@ export type section = "TODAY" | "WEEK" | string;
 export type storageKeys = "TASKS";
 export type taskFunction = (task: task) => void;
 export type colorObject = { value: string; label: string; color: string };
+
+export type projectType = {
+  color: ColourOption;
+  title: string;
+};

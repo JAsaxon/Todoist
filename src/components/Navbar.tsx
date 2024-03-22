@@ -7,14 +7,23 @@ import {
   faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/Navbar.scss";
-import { projectProps } from "../App";
+import { ColourOption, colourOptions } from "../data/colorData";
 import { Accordion, Card, useAccordionButton } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AccordionEventKey } from "react-bootstrap/esm/AccordionContext";
 import { CreateProjectModal } from "./CreateProjectModal";
+import { projectType } from "../types";
 
 export function Navbar() {
   const [createProject, setCreateProject] = useState(false);
+  const [projects, setProjects] = useState([
+    { color: colourOptions[1], title: "Social" },
+    { color: colourOptions[4], title: "Web dev" },
+    { color: colourOptions[7], title: "Work" },
+  ]);
+  function handleAdd(project: projectType) {
+    setProjects((prev) => [...prev, project]);
+  }
   const location = useLocation().pathname;
   return (
     <div className="sidebar">
@@ -43,6 +52,7 @@ export function Navbar() {
       <CreateProjectModal
         show={createProject}
         handleClose={() => setCreateProject(false)}
+        handleAdd={handleAdd}
       />
       <Accordion defaultActiveKey="0">
         <Card.Header>
@@ -50,9 +60,9 @@ export function Navbar() {
         </Card.Header>
         <Accordion.Collapse eventKey="0">
           <div className="projects">
-            <Project color={1} text="Social" />
-            <Project color={2} text="Web development" />
-            <Project color={3} text="Work" />
+            {projects.map((el) => {
+              return <Project color={el.color} text={el.title} />;
+            })}
           </div>
         </Accordion.Collapse>
       </Accordion>
@@ -60,10 +70,6 @@ export function Navbar() {
   );
 }
 
-export type createProjectModalProps = {
-  show: boolean;
-  handleClose: () => void;
-};
 type ProjectsToggle = {
   eventKey: string;
   callback?: (arg: AccordionEventKey) => void;
@@ -99,15 +105,22 @@ function ProjectsToggle({ eventKey, callback, setModal }: ProjectsToggle) {
 
   return <div>{HoverableSectionTitle}</div>;
 }
+type projectProps = {
+  text: string;
+  color: ColourOption;
+};
 function Project({ text, color }: projectProps) {
   const location = useLocation().pathname;
   console.log(location);
+  const style = { "--color-attr": color.color } as React.CSSProperties;
   const element = (hovered: boolean) => (
     <Link to={`project/${encodeURIComponent(text)}`}>
       <div
-        className={`project color${color} ${
+        className={`project ${
           location === `/project/${encodeURIComponent(text)}` ? "active" : ""
-        } `}
+        } 
+        `}
+        style={style}
       >
         <div className="text">{text}</div>
         {hovered && (
