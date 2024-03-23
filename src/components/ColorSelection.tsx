@@ -1,9 +1,6 @@
-import React from "react";
 import chroma from "chroma-js";
-import { colorObject } from "../types";
 import { ColourOption, colourOptions } from "../data/colorData";
 import Select, { StylesConfig } from "react-select";
-import { borderRadius } from "@mui/system";
 //! Stolen from the react-select examples, no clue how it works :p
 const dot = (color = "transparent") => ({
   alignItems: "center",
