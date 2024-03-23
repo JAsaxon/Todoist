@@ -1,6 +1,7 @@
 import chroma from "chroma-js";
 import { ColourOption, colourOptions } from "../data/colorData";
 import Select, { StylesConfig } from "react-select";
+import { colorObject } from "../types";
 //! Stolen from the react-select examples, no clue how it works :p
 const dot = (color = "transparent") => ({
   alignItems: "center",
@@ -61,13 +62,14 @@ const colourStyles: StylesConfig<ColourOption> = {
 };
 type colorSelectionProps = {
   handleChange: (obj: any) => void;
+  color: colorObject;
 };
 
-export default ({ handleChange }: colorSelectionProps) => (
+export default ({ handleChange, color }: colorSelectionProps) => (
   <Select
-    defaultValue={colourOptions[2]}
     options={colourOptions}
     onChange={handleChange}
+    value={color}
     styles={colourStyles}
   />
 );

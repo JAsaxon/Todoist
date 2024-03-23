@@ -1,6 +1,6 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import ColorSelection from "./ColorSelection";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projectType } from "../types";
 import { colourOptions } from "../data/colorData";
 type createProjectModalProps = {
@@ -18,6 +18,7 @@ export function CreateProjectModal({
   const titleRef = useRef<HTMLInputElement | null>(null);
   const [color, setColor] = useState(colourOptions[2]);
   console.log("H", color);
+
   function handleSubmit() {
     const alreadyExists = projects.some(
       (el) => el.title === titleRef.current!.value
@@ -31,6 +32,8 @@ export function CreateProjectModal({
           color: color.color,
         },
       });
+      setColor(colourOptions[2]);
+
       handleClose();
     }
   }
@@ -55,7 +58,7 @@ export function CreateProjectModal({
             ref={titleRef}
           />
           <Form.Label>Color</Form.Label>
-          <ColorSelection handleChange={setColor} />
+          <ColorSelection handleChange={setColor} color={color} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
