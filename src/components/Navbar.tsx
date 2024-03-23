@@ -9,7 +9,7 @@ import {
 import "../styles/Navbar.scss";
 import { ColourOption, colourOptions } from "../data/colorData";
 import { Accordion, Card, useAccordionButton } from "react-bootstrap";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AccordionEventKey } from "react-bootstrap/esm/AccordionContext";
 import { CreateProjectModal } from "./CreateProjectModal";
 import { projectType } from "../types";

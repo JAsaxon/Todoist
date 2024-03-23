@@ -1,8 +1,8 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import ColorSelection from "./ColorSelection";
-import { FormEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { projectType } from "../types";
-import { ColourOption, colourOptions } from "../data/colorData";
+import { colourOptions } from "../data/colorData";
 type createProjectModalProps = {
   show: boolean;
   handleClose: () => void;
