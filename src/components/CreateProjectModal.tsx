@@ -1,6 +1,6 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import ColorSelection from "./ColorSelection";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { projectType } from "../types";
 import { colourOptions } from "../data/colorData";
 type createProjectModalProps = {
