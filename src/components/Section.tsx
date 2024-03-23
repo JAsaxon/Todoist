@@ -21,7 +21,7 @@ const titleToDays = {
 };
 /*
 !The dueDate needs to be passed as an unix millisecond count 
-*If you need to use it without a dueDate use the section project component instead
+*If you need to use it without a dueDate use the section project component instead2
 
 */
 export default function Section({

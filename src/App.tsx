@@ -40,8 +40,5 @@ function App() {
     </div>
   );
 }
-export type projectProps = {
-  text: string;
-  color: number;
-};
+
 export default App;
