@@ -9,7 +9,7 @@ import {
 import "../styles/Navbar.scss";
 import { ColourOption, colourOptions } from "../data/colorData";
 import { Accordion, Card, useAccordionButton } from "react-bootstrap";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { AccordionEventKey } from "react-bootstrap/esm/AccordionContext";
 import { CreateProjectModal } from "./CreateProjectModal";
 import { projectType } from "../types";
@@ -23,6 +23,9 @@ export function Navbar() {
   ]);
   function handleAdd(project: projectType) {
     setProjects((prev) => [...prev, project]);
+  }
+  function handleClose() {
+    setCreateProject(false);
   }
   const location = useLocation().pathname;
   return (
@@ -51,8 +54,9 @@ export function Navbar() {
 
       <CreateProjectModal
         show={createProject}
-        handleClose={() => setCreateProject(false)}
+        handleClose={handleClose}
         handleAdd={handleAdd}
+        projects={projects}
       />
       <Accordion defaultActiveKey="0">
         <Card.Header>
