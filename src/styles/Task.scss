@@ -5,17 +5,19 @@
   .utilities {
     opacity: 0;
     transition: 0.3s;
+    display: flex;
+    margin-top: 1.2em;
   }
   .utilities.hover {
     opacity: 1;
   }
   .utility {
     padding: 5px;
-    transition: 50ms;
+    transition: 300ms;
+    height: 2em;
     border-radius: 5px;
-    color: rgb(179, 135, 145);
+    color: rgb(107, 33, 50);
 
-    cursor: pointer;
     svg {
       height: 20px;
     }
@@ -27,15 +29,11 @@
 }
 .task {
   display: flex;
-  padding-bottom: 1em;
-  height: 2em;
   transition: 200ms;
   flex-grow: 1;
   margin: 1em;
   margin-left: 0;
-  cursor: pointer;
   input {
-    cursor: pointer;
     width: 2em;
     height: 2em;
     margin-right: 1em;
@@ -80,5 +78,25 @@
   .late {
     font-weight: 600;
     color: rgb(169, 49, 49);
+  }
+}
+.project-select {
+  cursor: pointer;
+
+  margin: auto;
+  margin-left: 1.4rem;
+  font-weight: 500;
+  transition-duration: 300ms;
+  letter-spacing: -0.03em;
+  border-radius: 9px;
+  .fa-solid {
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+  font-size: 1.1rem;
+  color: #1b1919;
+  padding: 0.75rem 0.25em;
+  &:hover {
+    background-color: #dfdcdc9a;
   }
 }

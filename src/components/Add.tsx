@@ -123,7 +123,16 @@ function AddForm({
           Close
         </button>
         <button className={`submit-button ${enabled}`}>Add Task</button>
+        <ProjectSelect />
       </div>
     </form>
+  );
+}
+function ProjectSelect() {
+  return (
+    <div className="project-select">
+      <i className="fa-solid fa-inbox"></i>Project Select
+      <i className="fa-solid fa-caret-down"></i>
+    </div>
   );
 }
